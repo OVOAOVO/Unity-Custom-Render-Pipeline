@@ -21,6 +21,8 @@ public partial class CameraRenderer
         unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit"),
         litShaderTagId = new ShaderTagId("CustomLit");
 
+    Lighting lighting = new Lighting();
+
     bool Cull()
     {
         if (camera.TryGetCullingParameters(out ScriptableCullingParameters p))
@@ -79,6 +81,7 @@ public partial class CameraRenderer
         }
 
         SetUp();
+        lighting.Setup(context, cullingResults);
         DrawVisibleGeometry(useDynamicBatching, useGPUInstancing);
         DrawUnsupportedShaders();
         DrawGizmos();
